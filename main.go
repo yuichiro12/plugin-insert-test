@@ -2,22 +2,20 @@ package main
 
 var Params map[string]interface{}
 
-func OnRequest(m map[string]interface{}) {
+func init() {
+	Params = make(map[string]interface{})
+}
+
+func Apply(m map[string]interface{}) {
 	for k, v := range Params {
 		m[k] = v
 	}
 }
 
-func SetParams(key string, value interface{}) {
-	Params[key] = value
-}
-
-func OnResponse(m map[string]interface{}) {
+func Save(m map[string]interface{}) {
 	for k, v := range m {
 		Params[k] = v
 	}
 }
 
-func GetParams(key string) interface{} {
-	return Params[key]
-}
+// go build -buildmode=plugin
